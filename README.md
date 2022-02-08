@@ -37,3 +37,5 @@ pip install csv
 You will enter the query and script will find onion links related to it. It will create a '.csv' file of onion links and then it will check all onion links and return '.html' file .
 
 ![image](https://user-images.githubusercontent.com/81178088/152935318-cf516a71-6964-4e87-ad8b-cd7c0a57e244.png)
+
+This is just a example. Please don't use for anykind of illegal purpose. It can be harmful.
