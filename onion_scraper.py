@@ -4,6 +4,7 @@ import random
 from itertools import cycle
 from termcolor import colored
 import string
+import os
 
 def get_tor_session():
     session = requests.session()
@@ -12,17 +13,19 @@ def get_tor_session():
     return session
 
 def torSearcher(url):
-
     session = get_tor_session()
     print("Getting ...", url)
 
     try:
         result = session.get(url).text
         filename = ''.join(random.choice(string.ascii_lowercase) for i in range(16))
-        with open(f"{filename}.html","w+", encoding="utf-8") as newthing:
+        with open('Onion Sites' + '/' + filename + '.html',"w+", encoding="utf-8") as newthing:
             newthing.write(result)
+    except KeyboardInterrupt:
+        print("\n[!] Keyboard Interrupt Detected. Exiting...")
+        exit()
     except:
-        print("[!] Invalid URL")
+        print("[!] Above is Invalid URL")
 
 def start():
     print(colored('[#]Tor Browser\Browser\TorBrowser\Tor.exe Do not forget to start Tor.exe', 'red', attrs=['reverse', 'blink']))
