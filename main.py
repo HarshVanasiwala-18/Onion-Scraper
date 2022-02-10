@@ -5,6 +5,7 @@ import re
 from itertools import cycle
 from termcolor import colored
 import onion_scraper
+import os
 
 # https://httpbin.org/ip
 # http://ip-api.com/json/
@@ -39,38 +40,50 @@ def main():
 
     url = "https://ahmia.fi/search/?q={}".format(yourquery)
 
+    print('-'*50)
+
+    ROOT_DIR = 'Onion Sites'
+    project_dir = ROOT_DIR + '/'
+    if not os.path.exists(project_dir):
+        os.makedirs(project_dir)
+
     for i in range(1, 301):
         proxy = next(proxy_pool)
         userAgent = ua()
-        print("\r[*] Request : " + str(i), end = '')
         try:
-            response = requests.get(url, headers = userAgent, proxies = {'http': proxy, 'https': proxy})
+            print("\r[*] Request : " + str(i), end = '')
             try:
-                if response.status_code == 200:
-                    request_url = requests.get(url, headers = userAgent, proxies = {'http': proxy, 'https': proxy})
-                    content = request_url.text
-                    regexquery = "\w+\.onion"
-                    mineddata = re.findall(regexquery, content)
-                    filename = "onionsites.csv"
-                    print("\nSaving to ... ", filename)
-                    mineddata = list(dict.fromkeys(mineddata))
+                response = requests.get(url, headers = userAgent, proxies = {'http': proxy, 'https': proxy})
+                try:
+                    if response.status_code == 200:
+                        request_url = requests.get(url, headers = userAgent, proxies = {'http': proxy, 'https': proxy})
+                        content = request_url.text
+                        regexquery = "\w+\.onion"
+                        mineddata = re.findall(regexquery, content)
+                        filename = "onionsites.csv"
+                        print("\nSaving to ... ", filename)
+                        mineddata = list(dict.fromkeys(mineddata))
 
-                    with open(filename,"w+") as _:
-                        print("")
-                    for k in mineddata:
-                        with open(filename,"a") as newfile:
-                            k  = k + "\n"
-                            newfile.write(k)
-                    print("All the files written to a text file : \n", filename)
-                    break
-                else:
-                    print('\n[!] Proxy not working......Please try another proxy')
+                        with open(filename,"w+") as _:
+                            print("")
+                        for k in mineddata:
+                            with open(filename,"a") as newfile:
+                                k  = k + "\n"
+                                newfile.write(k)
+                        print("All the files written to a text file : \n", filename)
+                        break
+                    else:
+                        print('\n[!] Proxy not working......Please try another proxy')
+                except KeyboardInterrupt:
+                    print("\n[!]Keyboard Interrupt Detected. Exiting...")
             except KeyboardInterrupt:
-                print("\n[!]Keyboard Interrupt Detected. Exiting...")
+                print('\n[!] Exiting...')
+                exit()
+            except:
+                print("\n[!] Skipping. Connnection error")
         except KeyboardInterrupt:
-            print('\n[!] Exiting...')
-        except:
-            print("\n[!] Skipping. Connnection error")
+            print("\n[!]Keyboard Interrupt Detected. Exiting...")
+            exit()
 
 
 if __name__ == "__main__":
