@@ -39,3 +39,5 @@ You will enter the query and script will find onion links related to it. It will
 ![image](https://user-images.githubusercontent.com/81178088/152935318-cf516a71-6964-4e87-ad8b-cd7c0a57e244.png)
 
 This is just a example. Please don't use for anykind of illegal purpose. It can be harmful.
+
+Learn More here - https://www.osintme.com/index.php/2022/02/12/darkweb-osint-investigations-resources-for-2022/
