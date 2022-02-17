@@ -6,6 +6,9 @@ from itertools import cycle
 from termcolor import colored
 import onion_scraper
 import os
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import pandas as pd
 
 # https://httpbin.org/ip
 # http://ip-api.com/json/
@@ -21,13 +24,24 @@ def ua():
     return headers
 
 def get_proxy():
+    driver = webdriver.Chrome('chromedriver_win32\chromedriver.exe')
+    driver.get('https://free-proxy-list.net/')
+    content = driver.page_source
+    print('-'*50)
+    print('-'*50)
+    soup = BeautifulSoup(content, 'html.parser')
+    table = soup.find_all('div')
+    ip_table = pd.read_html(str(table))[0]
+    final_ips = ip_table["IP Address"].astype(str) + ":" + ip_table["Port"].astype(str)
+    final_ips.to_csv('proxylists.csv', index = False, header = False)
+
     proxylist = []
 
-    with open('proxylist.csv', 'r') as f:
+    with open('proxylists.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             proxylist.append(row[0])
-    
+
     return proxylist
 
 def main():
