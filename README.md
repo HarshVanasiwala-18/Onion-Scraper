@@ -41,3 +41,5 @@ You will enter the query and script will find onion links related to it. It will
 This is just a example. Please don't use for anykind of illegal purpose. It can be harmful.
 
 Learn More here - https://www.osintme.com/index.php/2022/02/12/darkweb-osint-investigations-resources-for-2022/
+
+Note : I have use chrome web drivers. You can use whatever web driver you want.
