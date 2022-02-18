@@ -26,7 +26,7 @@ def torSearcher(url):
         print("\n[!] Keyboard Interrupt Detected. Exiting...")
         exit()
     except:
-        print(f'[!] {url} :is not a valid onion site')
+        print(colored(f'[!] {url} :is not a valid onion site', 'red', attrs=['reverse', 'blink']))
 
 def start():
     print(colored('[#]Tor Browser\Browser\TorBrowser\Tor.exe Do not forget to start Tor.exe', 'red', attrs=['reverse', 'blink']))
