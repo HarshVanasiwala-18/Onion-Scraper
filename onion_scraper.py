@@ -31,7 +31,7 @@ def torSearcher(url):
 def start():
     print(colored('[#]Tor Browser\Browser\TorBrowser\Tor.exe Do not forget to start Tor.exe', 'red', attrs=['reverse', 'blink']))
     #Please enter the path of the file containing the tor.exe: Tor Browser\Browser\TorBrowser\Tor\tor.exe
-    os.startfile(r'C:\Users\harsh\OneDrive\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe')
+    os.startfile(r'path_to\tor.exe')
     onionlist = []
 
     with open('onionsites.csv', 'r') as f:
